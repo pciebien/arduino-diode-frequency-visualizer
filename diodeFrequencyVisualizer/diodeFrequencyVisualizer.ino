@@ -41,12 +41,18 @@ void Diode::blink(int durationInMs)
   turnOff();
 }
 
-Diode redOne(6);
+Diode *redDiode;
+Diode *yellowDiode;
+Diode *greenDiode;
 
 void setup() {
-  
+  redDiode = new Diode(6);
+  yellowDiode = new Diode(8);
+  greenDiode = new Diode(9);
 }
 
 void loop() {
-  redOne.blink(20);
+  redDiode->blink(20);
+  yellowDiode->blink(20);
+  greenDiode->blink(20);
 }
