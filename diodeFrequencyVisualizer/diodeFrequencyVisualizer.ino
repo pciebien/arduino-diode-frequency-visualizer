@@ -1,5 +1,3 @@
-#include <SoftwareSerial.h>
-
 class Diode
 {
   public:
@@ -44,15 +42,30 @@ void Diode::blink(int durationInMs)
 Diode *redDiode;
 Diode *yellowDiode;
 Diode *greenDiode;
+String soundPath; 
+int offset = 0;
 
-void setup() {
+void setup() 
+{
   redDiode = new Diode(6);
   yellowDiode = new Diode(8);
   greenDiode = new Diode(9);
+  soundPath = "112358132134558914423337761098715972584418167651094617711286574636875025121393196418317811514229832040134626921783093524578570288792274651493035224157817390881696324598610233415516558014126791429643349443770140873311349031701836311903";
 }
 
-void loop() {
-  redDiode->blink(20);
-  yellowDiode->blink(20);
-  greenDiode->blink(20);
+void loop() 
+{
+  int currentSample = (int)soundPath[offset] - 48;
+  
+  if(currentSample > 0 && currentSample < 4)
+  {
+      greenDiode->blink(currentSample * 100);
+  } 
+  else if(currentSample > 3 && currentSample < 7)
+  {
+      yellowDiode->blink(currentSample * 100);
+  }
+  else redDiode->blink(currentSample * 100);
+    
+  ++offset;
 }
